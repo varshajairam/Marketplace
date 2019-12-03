@@ -1,0 +1,23 @@
+.backpack-font {
+	font-family: Georgia, serif;
+}
+
+.backpack-font-wt {
+	font-weight: bold;
+}
+
+.backpack-font-align {
+	text-align: justify;
+}
+
+.backpack-nav-bg {
+	background-color: transparent;
+}
+
+.navbar-light .navbar-nav .nav-link:visited {
+    color: rgba(0,0,0,.9);
+}
+
+.padding-user {
+	padding-left: 10rem;
+}
