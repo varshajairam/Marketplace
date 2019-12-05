@@ -139,7 +139,7 @@
 
                     $response = json_decode($testing, true);
 
-                    Return $response;
+                    return $response;
                 }
 
                 function displayProducts($response, $id) {

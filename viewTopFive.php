@@ -11,50 +11,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-              $("button").click(function(){
-                var url = "";
-                switch (document.getElementById('company_id').value) {
-                    // case '1':
-                    //     url = "http://jayasuryapinaki.me/actions/saveReview.php";
-                    //     break;
-                    // case '2':
-                    //     url = "http://codebytes.tech/insertReview.php";
-                    //     break;
-                    case '3':
-                        url = "https://codemode.tech/src/getAnalytics.php";
-                        break;
-                    
-                    // default:
-                    //     $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
-                    //     break;
-                }
-                
-                // Initialize a CURL session.
-                $ch = curl_init();
-
-                // Return Page contents.
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-                //grab URL and pass it to the variable.
-                curl_setopt($ch, CURLOPT_URL, $url);
-
-                //$result = curl_exec($ch);
-
-                $testing = file_get_contents($url);
-
-                // var_dump(json_decode($testing, true));
-
-                $response = json_decode($testing, true);
-                echo "<pre>";
-                echo "CURL call done: " . $url . "<br>";
-                print_r($response);
-                echo "</pre>";
-
-              });
-            });
-        </script>
     </head>
     <body>
         
@@ -84,11 +40,12 @@
                     <div class="col-md-5">
                         <select class="form-control" name="filter">
                             <option value="1">Top 5 visited</option>
-                            <option value="2">Top 5 rated (Overall)</option>
-                            <option value="3">Top 5 prices</option>
-                            <option value="4">Bottom 5 prices</option>
-                            <option value="5">Recently visited</option>
-                            <option value="5">Best rated product</option>
+                            <option value="2">Best rated product</option>
+                            <option value="3">Top 5 rated (Quality)</option>
+                            <option value="4">Top 5 rated (Experience)</option>
+                            <option value="5">Top 5 rated (Overall)</option>
+                            <option value="6">Top 5 by price (High to low)</option>
+                            <option value="7">Top 5 by price (Low to high)</option>
                         </select>
                     </div>
                     <div class="col-md-2">
@@ -103,47 +60,72 @@
                     $url;
                     switch ($_GET['company_id']) {
                         case '1':
-                            $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php";
+                            $url = "http://jayasuryapinaki.me/actions/getTopFiveDetails.php";
                             break;
+
                         case '2':
                             $url = "http://codebytes.tech/getTopProducts.php";
                             break;
+
                         case '3':
                             $url = "https://codemode.tech/src/getAnalytics.php";
                             break;
+
                         case '4':
-                            $url = "http://www.shubhamzingh.tech/products/productLevelReview.php";
+                            // $url = "http://www.shubhamzingh.tech/products/productLevelReview.php";
                             break;
+
                         case '5':
-                            $url = "https://easylabs.tech/marketplace/perProduct.php";
+                            // $url = "https://easylabs.tech/marketplace/perProduct.php";
                             break;
                         
-                        default:
-                            $url = "Marketplace";
+                        case '6':
+                            $url = "http://jayasuryapinaki.me/actions/mergeAll.php";
                             break;
                     }
-                    echo $url;
+                    // echo $url;
 
                     // Initialize a CURL session.
-                $ch = curl_init();
+                    $ch = curl_init();
 
-                // Return Page contents.
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    // Return Page contents.
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-                //grab URL and pass it to the variable.
-                curl_setopt($ch, CURLOPT_URL, $url);
+                    //grab URL and pass it to the variable.
+                    curl_setopt($ch, CURLOPT_URL, $url);
 
-                //$result = curl_exec($ch);
+                    //$result = curl_exec($ch);
 
-                $testing = file_get_contents($url);
+                    $testing = file_get_contents($url);
 
-                // var_dump(json_decode($testing, true));
+                    // var_dump(json_decode($testing, true));
 
-                $response = json_decode($testing, true);
-                echo "<pre>";
-                echo "CURL call done: " . $url . "<br>";
-                print_r($response);
-                echo "</pre>";
+                    $response = json_decode($testing, true);
+
+
+                    $data = $response[$_GET['filter'] - 1];
+                    // echo ($_GET['filter'] - 1);
+                    // echo "<pre>";
+                    // echo "CURL call done: " . $url . "<br>";
+                    // print_r($data);
+                    // echo "</pre>";
+                    foreach ($data as $product) {
+                        echo '
+                            <div class="row mt-3 mb-3 border-bottom">
+                                <div class="col-md-3">
+                                    <img src="' . $product["product_image"] . '" class="img-fluid">
+                                </div>
+                                <div class="col-md-9">
+                                    <h4>' . $product["product_name"] . '</h4>
+                                </div>
+                            </div>
+                        ';
+                    }
+
+                    echo "<pre>";
+                    echo "CURL call done: " . $url . "<br>";
+                    print_r($response);
+                    echo "</pre>";
 
                 }
                 

@@ -25,7 +25,12 @@
                     case '3':
                         url = "https://codemode.tech/src/postReview.php";
                         break;
-                    
+                    case '4':
+                        url = "";
+                        break;
+                    case '5':
+                        url = "https://easylabs.tech/marketplace/storeReview.php";
+                        break;
                     // default:
                     //     $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
                     //     break;
