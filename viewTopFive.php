@@ -16,34 +16,42 @@
               $("button").click(function(){
                 var url = "";
                 switch (document.getElementById('company_id').value) {
-                    case '1':
-                        url = "http://jayasuryapinaki.me/actions/saveReview.php";
-                        break;
-                    case '2':
-                        url = "http://codebytes.tech/insertReview.php";
-                        break;
+                    // case '1':
+                    //     url = "http://jayasuryapinaki.me/actions/saveReview.php";
+                    //     break;
+                    // case '2':
+                    //     url = "http://codebytes.tech/insertReview.php";
+                    //     break;
                     case '3':
-                        url = "https://codemode.tech/src/postReview.php";
+                        url = "https://codemode.tech/src/getAnalytics.php";
                         break;
                     
                     // default:
                     //     $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
                     //     break;
                 }
-                $.post(url,
-                {
-                  user_id: document.getElementById('user_id').value,
-                  user_name: document.getElementById('user_name').value,
-                  product_id: document.getElementById('product_id').value,
-                  description: document.getElementById('description').value,
-                  rating_1: document.getElementById('rating_1').value,
-                  rating_2: document.getElementById('rating_2').value,
-                  rating_3: document.getElementById('rating_3').value
-                },
-                function(data,status){
-                  console.log("Data: " + data + "\nStatus: " + status);
-                  alert("Post data sent: \n" + data);
-                });
+                
+                // Initialize a CURL session.
+                $ch = curl_init();
+
+                // Return Page contents.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+                //grab URL and pass it to the variable.
+                curl_setopt($ch, CURLOPT_URL, $url);
+
+                //$result = curl_exec($ch);
+
+                $testing = file_get_contents($url);
+
+                // var_dump(json_decode($testing, true));
+
+                $response = json_decode($testing, true);
+                echo "<pre>";
+                echo "CURL call done: " . $url . "<br>";
+                print_r($response);
+                echo "</pre>";
+
               });
             });
         </script>
@@ -98,10 +106,10 @@
                             $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php";
                             break;
                         case '2':
-                            $url = "http://codebytes.tech/getProducts.php";
+                            $url = "http://codebytes.tech/getTopProducts.php";
                             break;
                         case '3':
-                            $url = "https://codemode.tech/src/getProductDetail.php";
+                            $url = "https://codemode.tech/src/getAnalytics.php";
                             break;
                         case '4':
                             $url = "http://www.shubhamzingh.tech/products/productLevelReview.php";
@@ -115,7 +123,30 @@
                             break;
                     }
                     echo $url;
+
+                    // Initialize a CURL session.
+                $ch = curl_init();
+
+                // Return Page contents.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+                //grab URL and pass it to the variable.
+                curl_setopt($ch, CURLOPT_URL, $url);
+
+                //$result = curl_exec($ch);
+
+                $testing = file_get_contents($url);
+
+                // var_dump(json_decode($testing, true));
+
+                $response = json_decode($testing, true);
+                echo "<pre>";
+                echo "CURL call done: " . $url . "<br>";
+                print_r($response);
+                echo "</pre>";
+
                 }
+                
             ?>
 
         </div>
