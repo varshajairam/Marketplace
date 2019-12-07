@@ -32,8 +32,8 @@
                             <option value="1">Elementary</option>
                             <option value="2">Tutorme</option>
                             <option value="3">Backpackers United</option>
-                            <option value="4">Shubham</option>
-                            <option value="5">Sudhanshu</option>
+                            <option value="4">The Moving Stories Co.</option>
+                            <option value="5">Allfit</option>
                             <option value="6">Entire Marketplace</option>
                         </select>
                     </div>
