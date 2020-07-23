@@ -162,23 +162,39 @@
                     }
                 }
 
-                $response1 = getContents("http://jayasuryapinaki.me/actions/getAllProducts.php");
-                $response2 = getContents("http://codebytes.tech/getProducts.php");
-                $response3 = getContents("https://www.codemode.tech/src/getProducts.php");
-                $response4 = getContents("http://www.shubhamzingh.tech/products/listAllProducts.php");
-                $response5 = getContents("https://easylabs.tech/marketplace/allProducts.php");
+                // $response1 = getContents("http://jayasuryapinaki.me/actions/getAllProducts.php");
+                // $response2 = getContents("http://codebytes.tech/getProducts.php");
+                // $response3 = getContents("https://www.codemode.tech/src/getProducts.php");
+                // $response4 = getContents("http://www.shubhamzingh.tech/products/listAllProducts.php");
+                // $response5 = getContents("https://easylabs.tech/marketplace/allProducts.php");
 
-                displayProducts($response1, 1);
-                displayProducts($response2, 2);
-                displayProducts($response3, 3);
-                displayProducts($response4, 4);
-                displayProducts($response5, 5);
+                // displayProducts($response1, 1);
+                // displayProducts($response2, 2);
+                // displayProducts($response3, 3);
+                // displayProducts($response4, 4);
+                // displayProducts($response5, 5);
 
                 // $response = array_merge($response1, $response2, $response3, $response4);
                 // echo "<pre>";
                 // print_r($response);
                 // echo "</pre>";
-
+                switch($_SERVER['QUERY_STRING']){
+                    case '1' : $response1 = getContents("http://jayasuryapinaki.me/actions/getAllProducts.php");
+                                displayProducts($response1, 1);
+                    break;
+                    case '2' : $response2 = getContents("http://codebytes.tech/getProducts.php");
+                                displayProducts($response2, 2);
+                    break;
+                    case '3' : $response3 = getContents("https://www.codemode.tech/src/getProducts.php");
+                                displayProducts($response3, 3);
+                    break;
+                    case '4' : $response4 = getContents("http://www.shubhamzingh.tech/products/listAllProducts.php");
+                                displayProducts($response4, 4);
+                    break;
+                    case '5' : $response5 = getContents("https://easylabs.tech/marketplace/allProducts.php");
+                                displayProducts($response5, 5);
+                    break;
+                }
 
             ?>
             

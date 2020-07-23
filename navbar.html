@@ -18,22 +18,24 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <!-- <li class="nav-item active">
         <a class="nav-link" href="./marketplace.php">Products</a>
+      </li> -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Products
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class='dropdown-item' href='./marketplace.php?1'>Elementary</a>
+          <a class='dropdown-item' href='./marketplace.php?2'>TutorMe</a>
+          <a class='dropdown-item' href='./marketplace.php?3'>Backpackers United</a>
+          <a class='dropdown-item' href='./marketplace.php?4'>Moving Stories Co.</a>
+          <a class='dropdown-item' href='./marketplace.php?5'>ALLFIT</a>
+        </div>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="./viewTopFive.php">View top five</a>
       </li>
-<!--       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
     </ul>
     <span class="navbar-text"><a href="./logout.php">Logout</a></span>
   </div>

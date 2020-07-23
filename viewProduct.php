@@ -63,6 +63,57 @@
 
             <!-- <h3><a href="../">Home ></a> <a href="../product.php">Products/ Services ></a> Quizzes</h3> -->
             <?php
+                $url = "";
+                // From URL to get webpage contents.
+                switch ($_GET['company']) {
+                    case '1':
+                        $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
+                        break;
+                    case '2':
+                        $url = "http://codebytes.tech/getProducts.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
+                        break;
+                    case '3':
+                        $url = "https://codemode.tech/src/getProductDetail.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
+                        break;
+                    case '4':
+                        $url = "http://www.shubhamzingh.tech/products/productLevelReview.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
+                        break;
+                    case '5':
+                        $url = "https://easylabs.tech/marketplace/perProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
+                        break;
+                    
+                    // default:
+                    //     $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
+                    //     break;
+                }
+
+                // Initialize a CURL session.
+                $ch = curl_init();
+
+                // Return Page contents.
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+                //grab URL and pass it to the variable.
+                curl_setopt($ch, CURLOPT_URL, $url);
+
+                //$result = curl_exec($ch);
+
+                $testing = file_get_contents($url);
+
+
+                // var_dump(json_decode($testing, true));
+
+                $response = json_decode($testing, true);
+                $cookie_name = "History_".$_COOKIE['userId'];                
+                
+                if(!isset($_COOKIE[$cookie_name])) { 
+                    $cookie_value = array(); 
+                    $cookie_value = array_push($cookie_value, $response['product_name']); 
+                    setcookie($cookie_name, serialize($cookie_value), time() + (10 * 365 * 24 * 60 * 60));
+                } else {
+                    $cookie_value = array_push($cookie_value, $response['product_name']); 
+                    setcookie($cookie_name, serialize($cookie_value), time() + (10 * 365 * 24 * 60 * 60));
+                }
 
                 function displayStars($count) {
                     echo "<h3>";
@@ -174,47 +225,7 @@
                     }
                 }
 
-                $url = "";
-                // From URL to get webpage contents.
-                switch ($_GET['company']) {
-                    case '1':
-                        $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
-                        break;
-                    case '2':
-                        $url = "http://codebytes.tech/getProducts.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
-                        break;
-                    case '3':
-                        $url = "https://codemode.tech/src/getProductDetail.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
-                        break;
-                    case '4':
-                        $url = "http://www.shubhamzingh.tech/products/productLevelReview.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
-                        break;
-                    case '5':
-                        $url = "https://easylabs.tech/marketplace/perProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
-                        break;
-                    
-                    // default:
-                    //     $url = "http://jayasuryapinaki.me/actions/getSingleProduct.php?product_id=" . $_GET['id'] . "&user_id=" . $_COOKIE['userId'] . "&user_name=" . $_COOKIE['userName'];
-                    //     break;
-                }
 
-                // Initialize a CURL session.
-                $ch = curl_init();
-
-                // Return Page contents.
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-                //grab URL and pass it to the variable.
-                curl_setopt($ch, CURLOPT_URL, $url);
-
-                //$result = curl_exec($ch);
-
-                $testing = file_get_contents($url);
-
-
-                // var_dump(json_decode($testing, true));
-
-                $response = json_decode($testing, true);
                 echo "<pre>";
                 echo "CURL call done: " . $url . "<br>";
                 print_r($response);
